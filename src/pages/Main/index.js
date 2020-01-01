@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { FaGithubAlt, FaPlus, FaSpinner } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 import api from "../../services/api";
 
-import { Container, Form, SubmitButton, List } from "./styles";
+import Container from "../../components/Container";
+import { Form, SubmitButton, List } from "./styles";
 
 export default class Main extends Component {
   state = {
@@ -52,7 +55,7 @@ export default class Main extends Component {
       <Container>
         <h1>
           <FaGithubAlt />
-          Repositories
+          Search Github Repositories
         </h1>
         <Form onSubmit={this.handleSubmit}>
           <input
@@ -74,7 +77,9 @@ export default class Main extends Component {
           {repositories.map(repository => (
             <li key={repository.name}>
               <span>{repository.name}</span>
-              <a href={repository}>Details</a>
+              <Link to={`/repository/${encodeURIComponent(repository.name)}`}>
+                Details
+              </Link>
             </li>
           ))}
         </List>
